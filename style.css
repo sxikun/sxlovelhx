@@ -1,0 +1,209 @@
+:root {
+  font-family: 'Noto Serif SC', 'Playfair Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #10121d 0%, #06070a 100%);
+  color: #f1f3f9;
+  touch-action: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  z-index: 1;
+  touch-action: none;
+}
+
+/* 顶部 HUD 标题与球坐标指示 */
+.hud-header {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.hud-title {
+  font-size: 1.15rem;
+  letter-spacing: 4px;
+  font-weight: 400;
+  color: #f5e4c3;
+  text-shadow: 0 0 12px rgba(245, 228, 195, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sparkle {
+  color: #ffb6c1;
+  font-size: 0.9rem;
+  animation: pulse-glow 2s infinite alternate ease-in-out;
+}
+
+.hud-coords {
+  background: rgba(18, 22, 34, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #9cb1d4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.coord-divider {
+  opacity: 0.3;
+}
+
+.coord-item b {
+  color: #e0ebff;
+  font-family: monospace;
+}
+
+/* 屏幕中央微提示 */
+.hud-hint {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 12px;
+  border-radius: 12px;
+  transition: opacity 0.5s;
+}
+
+/* 底部三大视角快捷按钮 */
+.hud-nav {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(14, 18, 28, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 10px 14px;
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 182, 193, 0.1);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 8px 18px;
+  color: #cfd8ea;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 215, 0, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+  color: #fff;
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.25) 0%, rgba(255, 105, 180, 0.15) 100%);
+  border-color: rgba(255, 182, 193, 0.55);
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.btn-icon {
+  font-size: 1.15rem;
+  filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.6));
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.btn-primary {
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.btn-sub {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+}
+
+.nav-btn.active .btn-sub {
+  color: rgba(255, 230, 240, 0.85);
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.4; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 8px #ffb6c1); }
+}
+
+@media (max-width: 640px) {
+  .hud-nav {
+    bottom: 20px;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .nav-btn {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  .btn-primary {
+    font-size: 0.78rem;
+  }
+  .btn-sub {
+    display: none;
+  }
+}

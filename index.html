@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D 浪漫粒子星空视界 · 刘涵馨</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="canvas"></canvas>
+
+      <!-- 顶栏信息与球坐标指示器 -->
+      <header class="hud-header">
+        <div class="hud-title">
+          <span class="sparkle">✦</span>
+          <span>专属星空 · 3D 粒子视界</span>
+          <span class="sparkle">✦</span>
+        </div>
+        <div class="hud-coords" id="coords-display">
+          <span class="coord-item">方位角 θ: <b id="azimuth-val">0°</b></span>
+          <span class="coord-divider">|</span>
+          <span class="coord-item">俯仰角 φ: <b id="polar-val">90°</b></span>
+        </div>
+      </header>
+
+      <!-- 交互提示 -->
+      <div class="hud-hint">
+        <span>🖱️ 拖拽鼠标可 360° 探索立体空间 · 滚轮缩放</span>
+      </div>
+
+      <!-- 底部三大专属视角切换按键 -->
+      <nav class="hud-nav">
+        <button class="nav-btn active" id="btn-portrait" data-target="portrait">
+          <span class="btn-icon">✨</span>
+          <span class="btn-text">
+            <span class="btn-primary">涵馨女神</span>
+            <span class="btn-sub">0° 绝美写真</span>
+          </span>
+        </button>
+
+        <button class="nav-btn" id="btn-name" data-target="name">
+          <span class="btn-icon">💌</span>
+          <span class="btn-text">
+            <span class="btn-primary">刘涵馨</span>
+            <span class="btn-sub">120° 流光之名</span>
+          </span>
+        </button>
+
+        <button class="nav-btn" id="btn-heart" data-target="heart">
+          <span class="btn-icon">💖</span>
+          <span class="btn-text">
+            <span class="btn-primary">怦然心动</span>
+            <span class="btn-sub">240° 脉动爱心</span>
+          </span>
+        </button>
+      </nav>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
