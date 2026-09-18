@@ -47,6 +47,6 @@ npm run build
 ---
 
 ## 📱 访问方式
-
+  通用网址：sxlovehx.netlify.app
 - **电脑端**：浏览器访问 `http://localhost:5173/`，鼠标拖拽旋转。
 - **手机端**：确保与电脑在同一 Wi-Fi，手机浏览器输入终端显示的 `Network` 局域网地址。
